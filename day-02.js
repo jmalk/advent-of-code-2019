@@ -24,10 +24,15 @@ const input = readFileSync("./inputs/day-02")
   .split(",")
   .map(Number);
 
-const inputCopy = input.map(x => x);
-inputCopy[1] = 12;
-inputCopy[2] = 2;
+function generateInitialState(noun, verb, input) {
+  let inputCopy = input.map(x => x);
+  inputCopy[1] = noun;
+  inputCopy[2] = verb;
+  return inputCopy;
+}
 
-console.log(processIntcode(inputCopy));
+console.log(
+  `Part one: ${processIntcode(generateInitialState(12, 2, input))[0]}`
+);
 
 module.exports = { processIntcode };

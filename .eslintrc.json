@@ -5,7 +5,9 @@
         "node": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:prettier/recommended",
+        "prettier"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -14,6 +16,10 @@
     "parserOptions": {
         "ecmaVersion": 2018
     },
+    "plugins": [
+        "prettier"
+    ],
     "rules": {
+        "prettier/prettier": "error"
     }
 }

@@ -18,4 +18,16 @@ function processIntcode(program) {
   return program;
 }
 
+const readFileSync = require("./lib/read-file-sync");
+
+const input = readFileSync("./inputs/day-02")
+  .split(",")
+  .map(Number);
+
+const inputCopy = input.map(x => x);
+inputCopy[1] = 12;
+inputCopy[2] = 2;
+
+console.log(processIntcode(inputCopy));
+
 module.exports = { processIntcode };

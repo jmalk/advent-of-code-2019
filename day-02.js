@@ -35,4 +35,13 @@ console.log(
   `Part one: ${processIntcode(generateInitialState(12, 2, input))[0]}`
 );
 
+for (let noun = 0; noun < 100; noun++) {
+  for (let verb = 0; verb < 100; verb++) {
+    const output = processIntcode(generateInitialState(noun, verb, input))[0];
+    if (output === 19690720) {
+      console.log(`Part two: ${100 * noun + verb}`);
+    }
+  }
+}
+
 module.exports = { processIntcode };

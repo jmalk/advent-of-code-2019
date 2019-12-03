@@ -126,3 +126,28 @@ const distanceToClosest = distances.reduce((acc, cur) => {
 console.log(distanceToClosest);
 
 module.exports = { makeWirePositions, manhattanDistance };
+
+// Calculate the number of steps each wire takes to reach each intersection
+function wireForIntersection(intersection) {
+  // +1 to both of these because it the zeroth value in the array is really the
+  // first unit length of wire needed.
+  const firstWireLength =
+    positions[0].findIndex(
+      pos => pos.x === intersection.x && pos.y === intersection.y
+    ) + 1;
+  const secondWireLength =
+    positions[1].findIndex(
+      pos => pos.x === intersection.x && pos.y === intersection.y
+    ) + 1;
+  return firstWireLength + secondWireLength;
+}
+
+const wireNeededForIntersections = intersections.map(wireForIntersection);
+const smallestWireNeeded = wireNeededForIntersections.reduce((acc, cur) => {
+  return Math.min(acc, cur);
+});
+
+console.log(
+  "Fewest combined steps to reach an intersection: ",
+  smallestWireNeeded
+);

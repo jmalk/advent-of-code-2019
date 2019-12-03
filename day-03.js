@@ -40,6 +40,28 @@ function makeWirePositions(instructions) {
   return positions;
 }
 
-module.exports = { makeWirePositions };
+const readFileSync = require("./lib/read-file-sync");
+
+const input = readFileSync("./inputs/day-03");
+const instructions = input.split("\n").map(str => str.split(","));
+const positions = instructions.map(makeWirePositions);
+
 // Make an array of points that appear in both arrays
+const intersections = [];
+
+// This next bit takes TIME, hence the console.log Got match! so you know something's happening.
+positions[0].forEach(pos => {
+  const match = positions[1].find(
+    otherPos => pos.x === otherPos.x && pos.y === otherPos.y
+  );
+  if (match) {
+    console.log("Got match!");
+    intersections.push(match);
+  }
+});
+
+console.log(intersections);
+
 // Find the intersection point with the lowest Manhattan distance from { x: 0, y: 0 }
+
+module.exports = { makeWirePositions };

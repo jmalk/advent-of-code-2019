@@ -1,4 +1,4 @@
-const { makeWirePositions } = require("./day-03");
+const { makeWirePositions, manhattanDistance } = require("./day-03");
 
 test("(Simple) Make wire positions", () => {
   const instructions = ["R1", "U1"];
@@ -39,4 +39,14 @@ test("Make wire positions", () => {
   ];
 
   expect(wirePositions).toEqual(expected);
+});
+
+test("Manhattan distance", () => {
+  expect(manhattanDistance({ x: 1, y: 1 })).toBe(2);
+  expect(manhattanDistance({ x: -1, y: 1 })).toBe(2);
+  expect(manhattanDistance({ x: -4, y: -7 })).toBe(11);
+  expect(manhattanDistance({ x: 3, y: -12 })).toBe(15);
+  expect(manhattanDistance({ x: 0, y: 0 })).toBe(0);
+  expect(manhattanDistance({ x: 2, y: 0 })).toBe(2);
+  expect(manhattanDistance({ x: 0, y: -2 })).toBe(2);
 });

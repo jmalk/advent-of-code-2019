@@ -31,8 +31,15 @@ const partOneAnswer = parsedInput.map(getFuelWeight).reduce(sum);
 
 const partTwoAnswer = parsedInput.map(getFullFuelWeight).reduce(sum);
 
+function partOne() {
+  return partOneAnswer;
+}
 console.log(partOneAnswer);
+
+function partTwo() {
+  return partTwoAnswer;
+}
 console.log(partTwoAnswer);
 
 // For unit testing:
-module.exports = { getFullFuelWeight };
+module.exports = { getFullFuelWeight, partOne, partTwo };

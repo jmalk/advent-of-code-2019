@@ -1,4 +1,10 @@
-const { parseInput, totalOrbits, countParentsToCOM } = require("./day-06");
+const {
+  parseInput,
+  totalOrbits,
+  countParentsToCOM,
+  distance,
+  getAncestors
+} = require("./day-06");
 
 test("Parse input turns orbit strings into objects", () => {
   const orbitString = "ABC)123";
@@ -60,5 +66,43 @@ describe("Count parents to COM works out how many steps from COM an object is in
       { name: "B", parent: "A" }
     ];
     expect(countParentsToCOM(obj, system)).toBe(2);
+  });
+});
+
+describe("Distance returns number of orbital hops needed to get between two bodies", () => {
+  test("Between two bodies orbiting the same COM", () => {
+    const system = [
+      { name: "A", parent: "COM" },
+      { name: "B", parent: "COM" }
+    ];
+    expect(distance("A", "B", system)).toBe(2);
+  });
+});
+
+describe("Get ancestors returns all ancestors of a given body in the system", () => {
+  test("For a small linear system", () => {
+    // COM - A - B
+    const system = [
+      { name: "A", parent: "COM" },
+      { name: "B", parent: "A" }
+    ];
+    expect(getAncestors("A", system)).toStrictEqual(["COM"]);
+    expect(getAncestors("B", system)).toStrictEqual(["COM", "A"]);
+  });
+
+  test("For a system with a fork in it", () => {
+    // COM - A - B - C
+    //            \
+    //             - D
+    const system = [
+      { name: "A", parent: "COM" },
+      { name: "B", parent: "A" },
+      { name: "C", parent: "B" },
+      { name: "D", parent: "B" }
+    ];
+    expect(getAncestors("A", system)).toStrictEqual(["COM"]);
+    expect(getAncestors("B", system)).toStrictEqual(["COM", "A"]);
+    expect(getAncestors("C", system)).toStrictEqual(["COM", "A", "B"]);
+    expect(getAncestors("D", system)).toStrictEqual(["COM", "A", "B"]);
   });
 });

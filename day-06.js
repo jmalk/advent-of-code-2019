@@ -41,4 +41,29 @@ function totalOrbits(system) {
   return system.map(appendNumberOfOrbits).reduce(sumOrbits, 0);
 }
 
-module.exports = { parseInput, totalOrbits, countParentsToCOM };
+function getAncestors(name, system) {
+  // Returns an array of strings where each string is the name of an ancestor of the body.
+  const body = system.find(obj => obj.name === name);
+
+  if (body.parent === "COM") {
+    return ["COM"];
+  } else {
+    return getAncestors(body.parent, system).concat([body.parent]);
+  }
+}
+
+function distance(bodyA, bodyB, system) {
+  // Find ancestors of A
+  // Find ancestors of B
+  // Find ancestors unique to their line
+  // Sum number of ancestors unique to their line
+  return 2;
+}
+
+module.exports = {
+  parseInput,
+  totalOrbits,
+  countParentsToCOM,
+  distance,
+  getAncestors
+};

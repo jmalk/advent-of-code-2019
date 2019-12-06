@@ -3,7 +3,8 @@ const {
   totalOrbits,
   countParentsToCOM,
   distance,
-  getAncestors
+  getAncestors,
+  findUniqueItems
 } = require("./day-06");
 
 test("Parse input turns orbit strings into objects", () => {
@@ -77,6 +78,19 @@ describe("Distance returns number of orbital hops needed to get between two bodi
     ];
     expect(distance("A", "B", system)).toBe(2);
   });
+
+  test("Between two bodies orbiting different children of the COM", () => {
+    // COM - A - B
+    //    \
+    //     - C - D
+    const system = [
+      { name: "A", parent: "COM" },
+      { name: "B", parent: "A" },
+      { name: "C", parent: "COM" },
+      { name: "D", parent: "C" }
+    ];
+    expect(distance("B", "D", system)).toBe(4);
+  });
 });
 
 describe("Get ancestors returns all ancestors of a given body in the system", () => {
@@ -105,4 +119,11 @@ describe("Get ancestors returns all ancestors of a given body in the system", ()
     expect(getAncestors("C", system)).toStrictEqual(["COM", "A", "B"]);
     expect(getAncestors("D", system)).toStrictEqual(["COM", "A", "B"]);
   });
+});
+
+describe("Find unique items takes two arrays and returns one array containing items which only appear in one of the inputs", () => {
+  // TODO: Is there already a JS function that can do this? Surely...
+  const a = [1, 2, 3, 4, 5, 6];
+  const b = [1, 2, 3, "a", "b", "c"];
+  expect(findUniqueItems(a, b)).toStrictEqual([4, 5, 6, "a", "b", "c"]);
 });

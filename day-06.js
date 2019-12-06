@@ -52,12 +52,20 @@ function getAncestors(name, system) {
   }
 }
 
+function findUniqueItems(arrayA, arrayB) {
+  const uniqueToA = arrayA.filter(item => !arrayB.includes(item));
+  const uniqueToB = arrayB.filter(item => !arrayA.includes(item));
+  return uniqueToA.concat(uniqueToB);
+}
+
 function distance(bodyA, bodyB, system) {
-  // Find ancestors of A
-  // Find ancestors of B
-  // Find ancestors unique to their line
-  // Sum number of ancestors unique to their line
-  return 2;
+  const ancestorsA = getAncestors(bodyA, system);
+  const ancestorsB = getAncestors(bodyB, system);
+  const uniqueBodies = findUniqueItems(ancestorsA, ancestorsB);
+  // Add 2 because it takes one step to get into and one to get out of the
+  // orbit of their last common ancestor.
+  const steps = uniqueBodies.length + 2;
+  return steps;
 }
 
 module.exports = {
@@ -65,5 +73,6 @@ module.exports = {
   totalOrbits,
   countParentsToCOM,
   distance,
-  getAncestors
+  getAncestors,
+  findUniqueItems
 };

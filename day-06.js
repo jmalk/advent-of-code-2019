@@ -4,8 +4,6 @@ const input = readFileSync("./inputs/day-06");
 
 const parsedInput = parseInput(input);
 
-console.log(parsedInput[0]);
-
 const orbits = totalOrbits(parsedInput);
 
 console.log(`Part one: ${orbits}`);

@@ -8,6 +8,17 @@ const orbits = totalOrbits(parsedInput);
 
 console.log(`Part one: ${orbits}`);
 
+const santa = parsedInput.find(obj => obj.name === "SAN");
+const santaLocation = parsedInput.find(obj => obj.name === santa.parent);
+const you = parsedInput.find(obj => obj.name === "YOU");
+const youLocation = parsedInput.find(obj => obj.name === you.parent);
+const distanceToSanta = distance(
+  santaLocation.name,
+  youLocation.name,
+  parsedInput
+);
+console.log(`Part two: ${distanceToSanta}`);
+
 function parseInput(string) {
   const lines = string.split("\n");
   const pairs = lines.map(line => {

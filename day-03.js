@@ -26,12 +26,12 @@ function step(direction, currentPosition) {
 function makeWirePositions(instructions) {
   let currentPosition = { x: 0, y: 0 };
   // Don't include origin in positions or it will always be closest to origin!
-  let positions = [];
+  const positions = [];
 
   instructions.forEach(instruction => {
     const direction = instruction.slice(0, 1);
     const distance = instruction.slice(1);
-    for (let i = 0; i < distance; i++) {
+    for (let i = 0; i < distance; i += 1) {
       const newPosition = step(direction, currentPosition);
       positions.push(newPosition);
       currentPosition = newPosition;

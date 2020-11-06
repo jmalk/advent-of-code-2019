@@ -1,24 +1,3 @@
-const readFileSync = require("./lib/read-file-sync");
-
-const input = readFileSync("./inputs/day-06");
-
-const parsedInput = parseInput(input);
-
-const orbits = totalOrbits(parsedInput);
-
-console.log(`Part one: ${orbits}`);
-
-const santa = parsedInput.find(obj => obj.name === "SAN");
-const santaLocation = parsedInput.find(obj => obj.name === santa.parent);
-const you = parsedInput.find(obj => obj.name === "YOU");
-const youLocation = parsedInput.find(obj => obj.name === you.parent);
-const distanceToSanta = distance(
-  santaLocation.name,
-  youLocation.name,
-  parsedInput
-);
-console.log(`Part two: ${distanceToSanta}`);
-
 function parseInput(string) {
   const lines = string.split("\n");
   const pairs = lines.map(line => {
@@ -58,9 +37,8 @@ function getAncestors(name, system) {
 
   if (body.parent === "COM") {
     return ["COM"];
-  } else {
-    return getAncestors(body.parent, system).concat([body.parent]);
   }
+  return getAncestors(body.parent, system).concat([body.parent]);
 }
 
 function findUniqueItems(arrayA, arrayB) {
@@ -78,6 +56,28 @@ function distance(bodyA, bodyB, system) {
   const steps = uniqueBodies.length + 2;
   return steps;
 }
+
+const readFileSync = require("./lib/read-file-sync");
+
+const input = readFileSync("./inputs/day-06");
+
+const parsedInput = parseInput(input);
+
+const orbits = totalOrbits(parsedInput);
+
+console.log(`Part one: ${orbits}`);
+
+const santa = parsedInput.find(obj => obj.name === "SAN");
+const santaLocation = parsedInput.find(obj => obj.name === santa.parent);
+const you = parsedInput.find(obj => obj.name === "YOU");
+const youLocation = parsedInput.find(obj => obj.name === you.parent);
+const distanceToSanta = distance(
+  santaLocation.name,
+  youLocation.name,
+  parsedInput
+);
+
+console.log(`Part two: ${distanceToSanta}`);
 
 module.exports = {
   parseInput,

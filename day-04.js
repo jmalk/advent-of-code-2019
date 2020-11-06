@@ -1,30 +1,9 @@
-const input = "183564-657474";
-
-const bounds = input.split("-").map(Number);
-const passwordsInRange = range(bounds[0], bounds[1]);
-
-const acceptablePasswords = passwordsInRange
-  .filter(twoAdjacentDigitsMatch)
-  .filter(digitsNeverDecrease);
-
-console.log(
-  `Part one - number of passwords that meet all rules: ${acceptablePasswords.length}`
-);
-
-const partTwoAcceptablePasswords = passwordsInRange
-  .filter(containsPairOfDigits)
-  .filter(digitsNeverDecrease);
-
-console.log(
-  `Part two - number of passwords that meet all rules: ${partTwoAcceptablePasswords.length}`
-);
-
 function range(start, end) {
-  const range = [];
+  const ret = [];
   for (let i = start; i <= end; i += 1) {
-    range.push(i);
+    ret.push(i);
   }
-  return range;
+  return ret;
 }
 
 function toArrayOfDigits(number) {
@@ -65,6 +44,27 @@ function digitsNeverDecrease(number) {
   const digits = toArrayOfDigits(number);
   return digits.reduce(reducer, true);
 }
+
+const input = "183564-657474";
+
+const bounds = input.split("-").map(Number);
+const passwordsInRange = range(bounds[0], bounds[1]);
+
+const acceptablePasswords = passwordsInRange
+  .filter(twoAdjacentDigitsMatch)
+  .filter(digitsNeverDecrease);
+
+console.log(
+  `Part one - number of passwords that meet all rules: ${acceptablePasswords.length}`
+);
+
+const partTwoAcceptablePasswords = passwordsInRange
+  .filter(containsPairOfDigits)
+  .filter(digitsNeverDecrease);
+
+console.log(
+  `Part two - number of passwords that meet all rules: ${partTwoAcceptablePasswords.length}`
+);
 
 module.exports = {
   twoAdjacentDigitsMatch,

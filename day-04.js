@@ -1,6 +1,6 @@
 const input = "183564-657474";
 
-const bounds = input.split("-");
+const bounds = input.split("-").map(Number);
 const passwordsInRange = range(bounds[0], bounds[1]);
 
 const acceptablePasswords = passwordsInRange
@@ -20,15 +20,15 @@ console.log(
 );
 
 function range(start, end) {
-  let range = [];
-  for (let i = start; i <= end; i++) {
+  const range = [];
+  for (let i = start; i <= end; i += 1) {
     range.push(i);
   }
   return range;
 }
 
 function toArrayOfDigits(number) {
-  return ("" + number).split("");
+  return `${number}`.split("");
 }
 
 function nextItemMatches(element, index, array) {
